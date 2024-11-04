@@ -1,0 +1,156 @@
+$beige: #FEF2DF
+$beige50: rgba(254, 242, 223, 0.5)
+$beige80: rgba(254, 242, 223, 0.8)
+$dark: #333
+$green: #567E72
+
+body, button, input, textarea, select
+	font-family: 'Aeroport', sans-serif
+	color: $dark
+	font-weight: 300
+	
+	&.no-scroll
+		overflow: hidden
+	
+	.container
+		max-width: 1680px
+		margin: 0 auto
+		
+	a, a:hover
+		text-decoration: none
+		color: inherit
+		
+.montserrat
+	font-family: "Montserrat", sans-serif
+	
+.btn
+	display: grid
+	background: transparent
+	height: 50px
+	align-items: center
+	padding: 0 15px
+	transition: .3s
+	text-align: center
+	
+	&-beige
+		background: $beige
+		color: $green
+		
+		&:hover
+			background: #fdeace
+			
+		&-outline
+			color: $beige
+			border: 2px solid $beige
+			
+			&:hover
+				background: $beige
+				color: $dark
+				
+	&-green
+		background: $green
+		color: $beige
+		
+		&:hover
+			background: #45695e
+			
+		&-outline
+			color: $green
+			border: 2px solid $green
+			
+			&:hover
+				background: $green
+				color: white
+				
+.slider
+	position: relative
+	
+	.slick
+		&-dots
+			display: flex
+			justify-content: center
+			gap: 16px
+			position: absolute
+			bottom: 3vh
+			left: 0
+			right: 0
+			
+			li
+				display: grid
+				border: 2px solid $beige
+				width: 16px
+				height: 16px
+				transition: .3s
+				
+				button
+					display: none
+					
+				&.slick-active
+					background: $beige
+					
+%line-thought
+	content: ''
+	left: -8px
+	right: -5px
+	width: auto
+	height: 2px
+	background: $dark
+	top: 45%
+	position: absolute
+	transform: rotate(3deg)
+	
+	
+@media( max-width: 1680px )
+	body
+		.container
+			max-width: 1440px
+			
+@media( max-width: 1440px )
+	body
+		.container
+			max-width: 1380px
+			
+@media( max-width: 1380px )
+	body
+		.container
+			max-width: 1280px
+			
+@media( max-width: 1280px )
+	body
+		.container
+			max-width: 1140px
+
+@media( max-width: 1140px )
+	body
+		.container
+			max-width: 1024px
+			
+@media( max-width: 1024px )
+	body
+		.container
+			max-width: 960px
+			
+@media( max-width: 960px )
+	body
+		.container
+			max-width: 840px
+			
+@media( max-width: 840px )
+	body
+		.container
+			max-width: 768px
+			
+@media( max-width: 768px )
+	body
+		.container
+			max-width: 640px
+			
+@media( max-width: 640px )
+	body
+		overflow-x: hidden
+		
+		.container
+			max-width: 100%
+			padding-left: 15px
+			padding-right: 15px
+			

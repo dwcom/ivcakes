@@ -1,0 +1,1178 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&family=Ubuntu&display=swap')
+@import 'css/reset'
+@import 'css/slider'
+@import 'css/gallery'
+@import 'css/preset'
+@import 'css/variation'
+@import 'css/font'
+
+.header
+	padding: 15px 0
+	position: fixed
+	z-index: 2
+	left: 0
+	right: 0
+	transition: .3s
+	&__bar
+		display: none
+		
+	&__search
+		cursor: pointer
+		
+	&__content
+		display: grid
+		grid-template-columns: 1fr 216px 1fr
+		align-items: center
+		gap: 1rem
+		
+		*
+			transition: .3s
+	
+	&__menu
+		ul
+			display: flex
+			justify-content: left
+			gap: 1.5rem
+			
+			a
+				color: $beige
+				text-decoration: none
+				
+				&:hover
+					text-decoration: underline
+	
+	&__action
+		display: flex
+		justify-content: right
+		gap: 2.5rem
+		align-items: center
+		
+		.item
+			.icon
+				display: grid
+				
+	&__popup
+		display: none
+		backdrop-filter: blur(5px)
+		position: fixed
+		top: 0
+		left: 0
+		bottom: 0
+		right: 0
+		
+	&__form
+		margin-top: 10vh
+		
+		.aws
+			&-wrapper
+				*
+					font-size: 22px !important
+				
+			&-search
+				&-form
+					height: auto
+					
+				&-field
+					padding: 25px
+					
+				&-result
+					*
+						font-size: 18px !important
+				
+	&__card
+		position: relative
+		
+		.card
+			width: 16px
+			height: 16px
+			display: grid
+			align-content: center
+			justify-content: center
+			color: $green
+			background: $beige
+			font-size: 10px
+			border-radius: 20px
+			line-height: 1
+			position: absolute
+			bottom: -5px
+			left: 50%
+			margin-left: -8px
+			
+	&__mobile
+		display: none
+		position: relative
+	&.scroll
+		background: white
+		
+		svg
+			path
+				fill: #567E72
+				
+		.header
+			&__menu
+				ul
+					a
+						color: $green
+						
+			&__feedback
+				border: 2px solid $green
+				color: $green
+				
+				&:hover
+					color: white
+					background: $green
+				
+.banner
+	&__slider
+		.item
+			&__content
+				position: relative
+				background-size: cover !important
+				background-position: center !important
+				height: 100vh
+				display: grid
+				
+			&__group
+				align-self: center
+				
+			&__group
+				margin: 0 auto
+				max-width: 680px
+				
+			&__btn
+				max-width: 220px
+				margin: 0 auto
+.info
+	&__wrap
+		background: $beige50
+
+	&__bg
+		background: $green
+		height: 472px
+		position: relative
+		
+		&--image
+			position: absolute
+			right: 10vw
+			
+		&--line
+			width: 2px
+			height: 320px
+			position: absolute
+			right: 7vw
+			top: 50%
+			margin-top: calc(-320px / 2)
+			
+	&__group
+		display: grid
+		grid-template-columns: 680px 1fr
+		gap: 64px
+		max-width: 1440px
+		margin: -340px auto 0
+		z-index: 1
+		position: relative
+		padding-bottom: 64px
+		
+		&--full
+			max-width: 1680px
+			margin: -300px auto 0
+			grid-template-columns: 840px 1fr
+		
+	&__subtitle
+		opacity: .7
+		line-height: 180%
+		
+		&--680
+			max-width: 680px
+		
+	&__btn
+		display: grid
+		grid-template-columns: 220px 1fr
+		align-items: center
+		gap: 32px
+			
+		&--line
+			background: $green
+			width: 100%
+			height: 2px
+			
+	&__title
+		margin-bottom: 160px
+		margin-left: -180px
+		margin-top: 60px
+		min-height: 180px
+		
+		&--840
+			max-width: 840px
+			margin-top: 40px
+			margin-bottom: 120px
+			
+	&__breadcrumb
+		color: $beige
+		font-size: 18px
+			
+.special
+	&__title
+		position: relative
+		
+		&:after
+			content: ''
+			max-width: 960px
+			height: 30px
+			position: absolute
+			background: $beige
+			left: 0
+			right: 0
+			margin: 0 auto
+			z-index: -1
+			bottom: 5px
+.catalog
+	&__group
+		.slider
+			margin: 0 -16px
+			
+			.item
+					margin: 0 16px
+				
+		.grid
+			.catalog
+				&__list
+					display: grid
+					gap: 32px
+					grid-template-columns: 1fr 1fr 1fr
+			
+				
+	&__list
+		.item
+			&__link
+				display: block
+				position: relative
+			
+			&__label
+				position: absolute
+				top: 2rem
+				left: 0
+				background: $green
+				color: white
+				padding: 5px 25px
+				z-index: 1
+				
+			&__image
+				position: relative
+				
+			&__hover
+				position: absolute
+				top: 0
+				bottom: 0
+				right: 0
+				left: 0
+				display: grid
+				align-content: center
+				justify-content: center
+				background: $beige80
+				text-align: center
+				color: $green
+				transition: .3s
+				opacity: 0
+				
+				svg
+					margin: 0 auto
+					
+			&__price
+				display: flex
+				gap: 24px
+				align-items: center
+				
+				.old
+					opacity: .5
+					position: relative
+					&:after
+						@extend %line-thought
+				
+			&:hover
+				.item
+					&__hover
+						opacity: 1
+							
+		.slick-dots
+			bottom: 0
+			margin-top: 32px
+			position: relative
+			
+			li
+				border: 2px solid $green
+				
+				&.slick-active
+					background: $green
+.online
+	&__wrap
+		background-size: cover !important
+		background-position: center !important
+		padding: 5vh 5vw
+		
+	&__border
+		border: 5px solid $beige
+		padding: 5vh 5vw
+		
+	&__btn
+		max-width: 260px
+		margin: 16vh auto
+.month
+	&__wrap
+		background: $beige
+		padding: 64px 0
+		
+	&__bg
+		background: url('/wp-content/uploads/2024/10/month.svg') no-repeat bottom left
+		background-size: auto
+		
+	&__content
+		display: grid
+		grid-template-columns: 1fr 840px
+		align-items: center
+		
+	&__title
+		max-width: 480px
+		line-height: 1.2
+		
+	&__subtitle
+		line-height: 1.8
+		max-width: 680px
+		opacity: .7
+		
+	&__btn
+		max-width: 220px
+		
+		svg
+			path
+				transition: .3s
+		
+		span
+			display: flex
+			gap: 5px
+			align-items: center
+			justify-content: center
+			
+		&:hover
+			svg
+				path
+					fill: $beige
+			
+	&__right
+		position: relative
+			
+	&__label
+		background: $green
+		color: $beige
+		padding: 25px
+		border-right: 10px solid $beige
+		min-width: 300px
+		position: absolute
+		bottom: 50px
+		z-index: 1
+		margin-left: -150px
+		
+		.price
+			display: flex
+			align-items: center
+			gap: 16px
+			
+			.old
+				position: relative
+				opacity: .8
+				&:after
+					@extend %line-thought
+					background: $beige
+					
+.feedback
+	&__bg
+		background: url('/wp-content/uploads/2024/10/feedback-bg.svg') no-repeat bottom right
+		background-size: auto
+		
+	&__wrap
+		background: $green
+		padding: 5vh 5vw
+		
+	&__border
+		border: 5px solid $beige
+		padding: 5vh 5vw
+		
+	&__subtitle
+		opacity: .7
+		max-width: 840px
+		margin: 0 auto 32px
+		
+	&__form
+		.label
+			display: grid
+			
+		.input
+			display: grid
+			background: white
+			color: $green
+			height: 60px
+			padding: 0 15px
+			
+		.textarea
+			min-height: 80px
+			padding: 15px
+			
+		.full
+			grid-column: 1/-1
+			
+		.btn
+			height: 60px
+			
+		.form
+			position: relative
+				
+		
+			&__group
+				display: grid
+				grid-template-columns: 1fr 1fr 1fr
+				max-width: 980px
+				margin: 0 auto
+				gap: 32px
+	&__or
+		display: flex
+		justify-content: center
+		gap: 10px
+		align-items: center
+		margin: 32px 0
+		color: $beige
+		text-transform: uppercase
+		
+		span
+			position: relative
+			width: 60px
+			height: 2px
+			background: $beige
+	&__social
+		position: relative
+		
+		.list
+			display: flex
+			gap: 16px
+			justify-content: center
+			margin-top: 16px
+.image
+	&__item
+		display: grid
+		
+.benefit
+	&__wrap
+		background: $beige50
+		padding: 64px 0
+		margin-bottom: 64px
+		
+	&__list
+		display: grid
+		grid-template-columns: 1fr 1fr 1fr
+		gap: 3rem
+		
+		.item
+			&__content
+				display: grid
+				grid-template-columns: 96px 1fr
+				gap: 1.5rem
+				
+			&__group
+				margin-top: 15px
+				
+			&__subtitle
+				opacity: .7
+				
+.contact
+	&__wrap
+		margin-bottom: 64px
+		
+	&__content
+		display: grid
+		grid-template-columns: 840px 1fr
+		align-items: center
+		gap: 6vw
+		
+	&__map
+		height: 720px
+		
+		canvas
+			filter: grayscale(1)
+			
+	&__right
+		display: grid
+		gap: 2rem
+		
+	&__group
+		display: grid
+		gap: 1.5rem
+		
+	&__btn
+		max-width: 220px
+		
+	&__item
+		display: flex
+		align-items: center
+		gap: 8px
+		
+	&__social
+		display: flex
+		gap: 20px
+		
+.footer
+	&__bg
+		background: url('/wp-content/uploads/2024/10/footer-bg.svg') no-repeat bottom right
+		background-size: auto
+		
+	&__wrap
+		background: $green
+		color: $beige
+		padding: 64px 0
+		
+	&__top
+		display: grid
+		grid-template-columns: 1fr 1fr 1fr 48px
+		
+	&__menu
+		ul
+			display: grid
+			gap: 16px
+			
+			a:hover
+				text-decoration: underline
+				
+	&__about
+		display: grid
+		gap: 32px
+		
+	&__flex
+		display: flex
+		gap: 32px
+		
+	&__group
+		display: grid
+		gap: 8px
+		
+	&__title
+		font-weight: 500
+		
+	&__text
+		opacity: .8
+		
+	&__social
+		gap: 16px
+		display: grid
+		
+	&__end
+		border-top: 2px solid $beige
+		padding-top: 64px
+		margin-top: 64px
+		display: flex
+		gap: 64px
+		align-items: end
+		
+	&__subscribe
+		display: grid
+		gap: 8px
+		
+		.group
+			display: grid
+			grid-template-columns: 300px 165px
+			gap: 16px
+			
+		.label
+			display: grid
+			
+		.input
+			padding: 0 15px
+.product
+	&__gallery
+		> a
+			display: grid
+			margin-bottom: 32px
+			
+		.gallery
+			display: grid
+			grid-template-columns: 1fr 1fr 1fr
+			gap: 32px
+			
+			.item
+				display: grid
+				
+	&__subtitle
+		margin-bottom: 32px
+		
+		p
+			margin-bottom: 16px
+			
+	&__weight
+		opacity: .7
+		margin-bottom: 32px
+		
+	&__action
+		display: flex
+		gap: 24px
+		align-items: center
+		margin-bottom: 32px
+		
+	&__price
+		position: relative
+		.old
+			opacity: .5
+			text-decoration: line-through
+		
+	&__purchase
+		display: grid
+		grid-template-columns: 50px 1fr
+		gap: 16px
+		
+		input
+			border: 2px solid $green
+			display: grid
+			text-align: center
+			padding-left: 15px
+		
+		.btn
+			min-width: 200px
+			
+			span
+				align-items: center
+				display: flex
+				justify-content: center
+				gap: 8px
+				
+			&:hover
+				svg
+					path
+						fill: $beige
+	&__social
+		display: grid
+		
+		.list
+			display: flex
+			justify-content: space-between
+			margin: 6px 15px 0
+	&__tabs
+		.tabs
+			display: flex
+			gap: 32px
+			margin-bottom: 32px
+		
+			.item
+				cursor: pointer
+				border-bottom: 1px solid #fff0
+				
+				&.active
+					border-bottom: 1px solid $green
+					
+		.block
+			display: none
+			
+			&.active
+				display: block
+				
+			&__list
+				ul
+					list-style-type: disc
+					margin-left: 25px
+					display: grid
+					gap: 8px
+					opacity: .7
+					
+			.editor
+				opacity: .8
+				
+				line-height: 1.8
+.notion
+	&__block
+		position: relative
+		
+	&__list
+		position: fixed
+		top: 13vh
+		z-index: 2
+		
+		.item
+			color: white
+			display: grid
+			padding: 25px
+			font-size: 20px
+			
+			&.green
+				background: #00b000
+				
+@media( max-width: 1680px )
+	.header
+		&__action
+			gap: 1.5rem
+		&__bar
+			width: 40px
+			cursor: pointer
+			display: block
+			position: relative
+			transition: .3s
+			top: 0
+			
+			.line
+				display: block
+				position: relative
+				width: 40px
+				height: 3px
+				background: $beige
+				margin-bottom: 14px
+				top: 0
+				transition: .3s
+				opacity: 1
+				
+				&:last-child
+					margin-bottom: 0
+					
+			&.active
+				top: 8px
+				
+				.line
+					&-1
+						transform: rotate(45deg)
+						top: 8px
+						
+					&-2
+						transform: rotate(315deg)
+						top: -8px
+						
+					&-3
+						transform: rotate(360deg)
+						opacity: 0
+		&__menu
+			display: none
+		
+		&__mobile
+			display: block
+			position: fixed
+			left: -500px
+			top: 0
+			bottom: 0
+			max-width: 320px
+			background: $beige
+			transition: .3s
+			
+			&.active
+				left: 0
+			
+			.mobile
+				&__close
+					background: $green
+					color: $beige
+					padding: 10px
+					position: absolute
+					font-size: 10px
+					top: 0
+					right: 0
+					
+				&__logo
+					border-bottom: 1px solid $green
+					display: block
+					margin-bottom: 32px
+					padding-bottom: 32px
+					
+					svg
+						path
+							fill: $green
+						
+				&__content
+					padding: 50px 35px 0
+					position: relative
+					
+				&__menu
+					margin-bottom: 32px
+					
+					ul
+						display: grid
+						font-size: 20px
+						gap: 12px
+					
+					a
+						color: $green
+						
+						&:hover
+							text-decoration: underline
+							
+				&__feedback
+					margin-bottom: 32px
+					
+				&__social
+					display: flex
+					gap: 16px
+					
+					a
+						svg
+							path
+								fill: $green !important
+		&.scroll
+			.header
+				&__bar
+					.line
+						background: $green
+					
+@media( max-width: 1280px )
+	.header
+		padding: 8px 0
+		
+		&__search,
+		&__whatsapp,
+		&__telegram,
+		&__account
+			display: none
+			
+	.info
+		&__group
+			grid-template-columns: 580px 1fr
+			
+		&__title
+			line-height: 1
+			
+		&__bg
+			height: 400px
+			
+		&__btn
+			&--line
+				display: none
+				
+		&__subtitle
+			font-size: 16px
+			max-width: 95%
+			margin-bottom: 32px
+			
+		&__wrap
+			margin-bottom: 64px
+	.special
+		&__wrap
+			margin-bottom: 64px
+			
+		&__title
+			font-size: 38px
+			margin-bottom: 32px
+			
+			&:after
+				max-width: 840px
+				
+	.catalog
+		&__list
+			.item
+				&__price
+					.old
+						font-size: 24px
+					.new, .regular
+						font-size: 26px
+						
+	.online
+		&__wrap
+			margin-bottom: 64px
+			
+	.month
+		&__content
+			grid-template-columns: 1fr 600px
+			
+		&__label
+			bottom: 20px
+			
+			.title
+				font-size: 24px
+				
+	.feedback
+		&__title
+			font-size: 28px
+			
+	.benefit
+		&__list
+			.item
+				&__content
+					grid-template-columns: 64px 1fr
+					
+	.contact
+		&__content
+			grid-template-columns: 2fr 1fr
+			
+	.footer
+		&__menu
+			font-size: 18px
+			
+		&__top
+			grid-template-columns: 1fr 1fr 1.4fr 48px
+			
+		&__date
+			font-size: 18px
+				
+@media( max-width: 1024px )
+	.info
+		&__title
+			font-size: 48px
+			line-height: 1.2
+			max-width: 480px
+
+		&__group
+			grid-template-columns: 450px 1fr
+			
+	.catalog
+		&__list
+			.item
+				&__price
+						.old
+							font-size: 16px
+					
+						.new, .regular
+							font-size: 18px
+							
+				&__title
+					font-size: 18px
+					
+	.month
+		&__title
+			font-size: 48px
+			
+		&__label
+			bottom: 7px
+			position: relative
+			margin-left: 0
+			border-right: 0
+			
+			.title
+				font-size: 18px
+				
+			.price
+				.old
+					font-size: 18px
+				.new
+					font-size: 20px
+					
+		&__content
+			grid-template-columns: 1fr 480px
+			gap: 32px
+			
+	.benefit
+		&__list
+			.item
+				&__group
+					margin-top: 0
+					
+				&__title
+					font-size: 22px
+					
+				&__subtitle
+					font-size: 16px
+					
+	.contact
+		&__content
+			grid-template-columns: 1fr 1fr
+			
+		&__map
+			height: 550px
+			
+		&__item
+			display: grid
+			grid-template-columns: 24px 1fr
+			
+	.footer
+		&__top
+			grid-template-columns: 1fr 1fr
+			gap: 32px
+			
+		&__social
+			display: flex
+			
+		&__logo
+			svg
+				max-width: 160px
+
+@media( max-width: 960px )
+	.info
+		&__bg
+			height: 300px
+			
+		&__group
+			margin: -260px auto 0
+			
+		&__title
+			margin-bottom: 60px
+			
+	.catalog
+		&__list
+			.item
+				&__hover
+					span
+						font-size: 18px
+		&__group
+			.grid
+				.catalog
+					&__list
+						gap: 16px
+						
+			.slider
+				margin: 0 -8px
+				
+				.item
+					margin: 0 8px
+					
+	.month
+		&__content
+			grid-template-columns: 1fr 1fr
+					
+	.feedback
+		&__form
+			.form
+				&__group
+					grid-template-columns: 1fr
+					
+	.footer
+		&__end
+			padding-top: 32px
+			margin-top: 32px
+			display: grid
+			gap: 24px
+			align-items: normal
+			
+@media( max-width: 840px )
+	.info
+		&__bg
+			display: none
+			
+		&__group
+			margin: 0
+			padding-top: 35px
+			grid-template-columns: 1fr 1fr
+			gap: 32px
+			
+		&__title
+			color: $green
+			text-shadow: 3px 3px 0 $beige
+			margin-left: -90px
+			margin-top: 20px
+			margin-bottom: 16px
+			
+	.month
+		&__label
+			.title
+				margin-bottom: 16px
+			
+	.benefit
+		&__list
+			gap: 1rem
+			
+			.item
+				&__content
+					grid-template-columns: 48px 1fr
+			
+	.contact
+		&__content
+			grid-template-columns: 1fr
+			
+		&__map
+			height: 400px
+	
+@media( max-width: 768px )
+	.header
+		&__content
+			grid-template-columns: 150px 1fr 40px
+			
+		&__logo
+			svg
+				width: 150px
+				height: auto
+				
+		&__bar
+			grid-column: 3
+			grid-row: 1
+	.info
+		&__group
+			grid-template-columns: 1fr
+			
+		&__left
+			display: none
+			
+		&__title
+			margin-left: 0
+			
+		&__right
+			max-width: 640px
+			margin: 0 auto
+	.catalog
+		&__group
+			.grid
+				.catalog
+					&__list
+						grid-template-columns: 1fr 1fr
+	.special
+		.item
+			&:last-child
+				display: none
+	.month
+		&__content
+			grid-template-columns: 1fr
+			
+		&__left
+			grid-column: 1
+			grid-row: 2
+		
+		&__right
+			grid-column: 1
+			grid-row: 1
+			
+		&__title
+			font-size: 32px
+			
+	.benefit
+		&__list
+			grid-template-columns: 1fr
+			gap: 32px
+
+@media( max-width: 640px )
+	.info
+		&__right
+			padding-left: 15px
+			padding-right: 15px
+			
+		&__title
+			font-size: 32px
+			max-width: 90%
+			min-height: auto
+			
+@media( max-width: 480px )
+	.header
+		&__feedback
+			display: none
+			
+	.footer
+		&__top
+			grid-template-columns: 1fr
+		
+		&__flex
+			display: grid
+			
+		&__subscribe
+			.group
+				grid-template-columns: 1fr
+			
+				input
+					height: 50px
+					
+@media( max-width: 470px )
+	.catalog
+		&__group
+			.grid
+				.catalog
+					&__list
+						grid-template-columns: 1fr
+						
+						.item
+							&:last-child
+								display: block
+							
+	.month
+		&__label
+			padding: 15px
+			min-width: auto
+			
+	.feedback
+		&__title
+			font-size: 24px
+			
+		&__subtitle
+			font-size: 18px
