@@ -101,6 +101,9 @@
 	&__mobile
 		display: none
 		position: relative
+	&.green
+		background: $green
+		overflow: auto
 	&.scroll
 		background: white
 		
@@ -811,7 +814,32 @@
 				&__bar
 					.line
 						background: $green
-					
+	.info
+		&__group
+			&--full
+				grid-template-columns: 1fr 1fr
+
+@media( max-width: 1440px )
+	.product
+		&__action
+			display: grid
+			
+		&__purchase
+			max-width: 300px
+			
+		&__or
+			display: none
+			
+		&__social
+			.list
+				justify-content: left
+				gap: 16px
+				margin: 6px 0 0 0
+
+	.info
+		&__group
+			&--full
+				gap: 32px
 @media( max-width: 1280px )
 	.header
 		padding: 8px 0
@@ -900,6 +928,30 @@
 			
 		&__date
 			font-size: 18px
+	.product
+		.info
+			&__group
+				&--full
+					grid-template-columns: 1fr 1fr
+				
+			&__title
+				margin-left: 0
+				font-size: 36px
+				line-height: 1.4
+				min-height: 120px
+				
+			&__bg
+				height: 320px
+				
+		&__weight,
+		&__action
+			margin-bottom: 16px
+			
+		.product
+			&__tabs
+				.tabs
+					font-size: 18px
+		
 				
 @media( max-width: 1024px )
 	.info
@@ -1034,6 +1086,9 @@
 		&__bg
 			display: none
 			
+		&__breadcrumb
+			color: $green
+			
 		&__group
 			margin: 0
 			padding-top: 35px
@@ -1093,6 +1148,7 @@
 		&__right
 			max-width: 640px
 			margin: 0 auto
+			
 	.catalog
 		&__group
 			.grid
@@ -1122,9 +1178,21 @@
 		&__list
 			grid-template-columns: 1fr
 			gap: 32px
-
+	.product
+		.info
+			&__left
+				display: block
+				
+			&__group
+				&--full
+					grid-template-columns: 1fr
+					margin: 0 auto
+					
 @media( max-width: 640px )
 	.info
+		&__group
+			padding-bottom: 32px
+			
 		&__right
 			padding-left: 15px
 			padding-right: 15px
@@ -1133,6 +1201,28 @@
 			font-size: 32px
 			max-width: 90%
 			min-height: auto
+			
+		&__subtitle
+			margin-bottom: 0
+			
+		&__wrap
+			margin-bottom: 32px
+			
+	.product
+		&__tabs
+			.tabs
+				display: grid
+			
+		.info
+			&__title
+				font-size: 24px
+				min-height: auto
+				
+			&__breadcrumb
+				font-size: 14px
+				
+			&__image
+				display: grid
 			
 @media( max-width: 480px )
 	.header

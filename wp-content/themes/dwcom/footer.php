@@ -128,6 +128,24 @@
     </div>
 </footer>
 
+<?php if (!is_front_page()) { ?>
+    <script>
+		jQuery(document).ready(function () {
+			$('body').each(function () {
+				let section = $(this).find('section').first();
+				let width = $(window).width();
+				let header = $('header').outerHeight(true);
+				if ( width <= 1280 ) {
+					$(section).css('padding-top', header + 'px')
+					$('.header').addClass('green')
+                }
+				
+			})
+		})
+    </script>
+<?php } ?>
+
+
 <?php wp_footer(); ?>
 
 </body>
