@@ -150,6 +150,7 @@
 	add_image_size( 'product-540-810', 540, 810, true );
 	add_image_size( 'product-256-388', 256, 388, true );
 	add_image_size( 'product-840-840', 840, 840, true );
+	add_image_size( 'product-840-640', 840, 640, true );
 	add_image_size( 'product-840-auto', 840, 'auto', false );
 	
 	

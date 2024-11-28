@@ -19,6 +19,8 @@
     $compound = get_field('compound');
     $storage = get_field('storage') ? get_field('storage') : get_field('storage','option');
     $delivery = get_field('delivery') ? get_field('delivery') : get_field('delivery','option');
+    $video = get_field('video');
+    $video_toggle = $video ? 'video' : 'classic';
     
 ?>
 
@@ -35,9 +37,16 @@
 				</div>
 				<div class="info__group info__group--full">
 					<div class="info__left">
-						<div class="info__image product__gallery">
-                            <a href="<?php echo $main_image_url ?>">
+						<div class="info__image product__gallery productGallery">
+                            <a class="info__main <?php echo $video_toggle ?>" href="<?php echo $main_image_url ?>">
                                 <img src="<?php echo $main_image_url ?>" alt="<?php the_title() ?>" />
+                                
+	                            <?php if ($video) { ?>
+                                    <video class="info__video" autoplay muted loop preload="auto">
+                                        <source src="<?php echo $video ?>">
+                                    </video>
+	                            <?php } ?>
+                                
                             </a>
                             <div class="gallery">
                                 <?php $i = 1; foreach ( $gallery_images as $image ) { ?>
@@ -45,7 +54,6 @@
                                         <img src="<?php echo $image['thumbnail'] ?>" alt="<?php the_title() ?> - Изображение <?php echo $i ?>">
                                     </a>
                                 <?php $i++; } ?>
-                                
                             </div>
 						</div>
 					</div>
@@ -187,8 +195,12 @@
             $('#' + block).addClass('active'); // Активируем соответствующий блок
             $(this).addClass('active'); // Активируем текущую вкладку
         });
-        
-        // Обработка клика по кнопке добавления в корзину
+		
+		// Галерея по клику
+	    $('.productGallery a').simpleLightbox();
+	    
+	    
+	    // Обработка клика по кнопке добавления в корзину
         $('#addToCartButton').on('click', function () {
             let productId = $(this).data('product-id'); // Идентификатор товара
             let quantity = $('#productQuantity').val(); // Количество товара

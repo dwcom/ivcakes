@@ -3,7 +3,7 @@
 	$category_id = $current_category->term_id;
 	$category_name = $current_category->name;
 	$thumbnail_id = get_term_meta($category_id, 'thumbnail_id', true);
-	$image_url = wp_get_attachment_image_url($thumbnail_id, 'product-840-auto');
+	$image_url = wp_get_attachment_image_url($thumbnail_id, 'product-840-640');
 ?>
 <section class="info">
 	<div class="info__wrap mb128">

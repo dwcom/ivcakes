@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/wp-content/themes/dwcom/style.min.css">
     <script src="/wp-content/themes/dwcom/js/jquery.js"></script>
     <script src="/wp-content/themes/dwcom/js/slider.js"></script>
+    <script src="/wp-content/themes/dwcom/js/gallery.js"></script>
     <script src="/wp-content/themes/dwcom/js/common.js"></script>
 
 </head>

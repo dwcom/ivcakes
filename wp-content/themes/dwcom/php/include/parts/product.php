@@ -3,11 +3,23 @@
     $regular_price = $product->get_regular_price();
     $sale_price = $product->get_sale_price();
     $current_price = $product->get_price();
+    $video = get_field('video');
+    $video_toggle = $video ? 'video' : 'classic';
 ?>
-<div class="item">
+<div class="item <?php echo $video_toggle ?>">
 	<a class="item__link" href="<?php echo get_permalink() ?>">
         <div class="item__image mb16">
-            <img src="<?php echo get_the_post_thumbnail_url( get_the_ID(), 'product-540-810' ) ?>" alt="<?php the_title() ?>" />
+            
+            <div class="item__poster">
+                <img src="<?php echo get_the_post_thumbnail_url( get_the_ID(), 'product-540-810' ) ?>" alt="<?php the_title() ?>" />
+            </div>
+            
+            <?php if ($video) { ?>
+                <video class="item__video" autoplay muted loop preload="auto">
+                    <source src="<?php the_field('video') ?>">
+                </video>
+            <?php } ?>
+            
 	        <?php if ( $sale_price ) { ?>
                 <div class="item__label fs18">Акция</div>
             <?php } ?>
