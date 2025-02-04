@@ -83,7 +83,6 @@
 					<div class="info__right">
 						<?php if ( function_exists('yoast_breadcrumb') ) { yoast_breadcrumb( '<div class="info__breadcrumb">','</div>' );} ?>
 						<h1 class="info__title fs64 weight-700 color-beige info__title--840"><?php the_title() ?></h1>
-						<div class="info__subtitle fs18 mb64 info__subtitle--680 product__subtitle"><?php the_content() ?></div>
                         
                         <?php if ($product_weight ) { ?>
                             <div class="product__weight fs24 weight-600">Вес: <span class="montserrat"><?php echo $product_weight ?></span> кг</div>
@@ -205,14 +204,20 @@
                         </div>
                         <div class="product__tabs">
                             <div class="tabs fs24 color-green weight-500">
-                                <?php if ( $compound ) { ?><div class="item active productTabItem" data-tab="compound">Состав</div><?php } ?>
-                                <div class="item productTabItem <?php if ( !$compound ) { ?>active<?php } ?>" data-tab="storage">Хранение</div>
+                                <div class="item productTabItem active" data-tab="subtitle">Описание</div>
+                                <?php if ( $compound ) { ?><div class="item productTabItem" data-tab="compound">Состав</div><?php } ?>
+                                <div class="item productTabItem" data-tab="storage">Хранение</div>
                                 <div class="item productTabItem" data-tab="delivery">Доставка и оплата</div>
                             </div>
                             
                             <div class="blocks">
+
+                                <div class="block active productTabBlock" id="subtitle">
+                                    <div class="info__subtitle fs18 mb64 info__subtitle--680 product__subtitle"><?php the_content() ?></div>
+                                </div>
+                                
 	                            <?php if ( $compound ) { ?>
-                                    <div class="block active productTabBlock" id="compound">
+                                    <div class="block productTabBlock" id="compound">
                                         <div class="block__list">
                                             <ul class="fs18">
                                                 <?php foreach ($compound as $item) { ?>
@@ -222,7 +227,7 @@
                                         </div>
                                     </div>
 	                            <?php } ?>
-                                <div class="block productTabBlock <?php if ( !$compound ) { ?>active<?php } ?>" id="storage">
+                                <div class="block productTabBlock" id="storage">
                                     <div class="editor fs18">
                                         <?php echo $storage ?>
                                     </div>

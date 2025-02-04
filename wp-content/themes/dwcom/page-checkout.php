@@ -14,10 +14,5 @@
 	</div>
 </section>
 
-<?php include get_template_directory() . "/php/include/blocks/feedback.php"; ?>
-<?php include get_template_directory() . "/php/include/blocks/image.php"; ?>
-<?php include get_template_directory() . "/php/include/blocks/benefit.php"; ?>
-<?php include get_template_directory() . "/php/include/blocks/contact.php"; ?>
-
 <?php get_footer() ?>
 

@@ -37,13 +37,6 @@ $(document).ready(() => {
 					slidesToShow: 2,
 					slidesToScroll: 1
 				}
-			},
-			{
-				breakpoint: 471,
-				settings: {
-					slidesToShow: 1,
-					slidesToScroll: 1
-				}
 			}
 		]
 	});

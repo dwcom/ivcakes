@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&family=Ubuntu&display=swap')
 @import 'css/reset'
+@import 'css/iphone'
 @import 'css/slider'
 @import 'css/gallery'
 @import 'css/preset'
@@ -75,6 +76,7 @@
 					
 				&-field
 					padding: 25px
+					background: white
 					
 				&-result
 					*
@@ -248,8 +250,8 @@
 		select
 			border: 1px solid $green
 			padding: 12px 10px
-		
-		
+			width: 100%
+			
 .special
 	&__title
 		position: relative
@@ -779,8 +781,39 @@
 	&__block
 		margin: 60px 0
 		
+	&-contact
+		margin-top: 60px
+		
+.about
+	margin-top: 100px
+	margin-bottom: 100px
+	
+	&__item
+		max-width: 1280px
+		margin: -40px auto
+		display: grid
+		grid-template-columns: 1fr 1fr
+		gap: 4vw
+		align-items: center
+		
+		&:nth-child(2n)
+			.item
+				&__left
+					grid-column: 2
+					grid-row: 1
+				&__right
+					grid-column: 1
+					grid-row: 1
+					
 @media( max-width: 1680px )
+	body
+		zoom: 0.95
+		
 	.header
+		padding: 5px 0
+		&__content
+			grid-template-columns: 1fr 180px 1fr
+			
 		&__action
 			gap: 1.5rem
 		&__bar
@@ -885,16 +918,25 @@
 						svg
 							path
 								fill: $green !important
+		&__logo
+			svg
+				width: 100%
 		&.scroll
 			.header
 				&__bar
 					.line
 						background: $green
 	.info
+		&__title
+			font-size: 54p
 		&__group
 			&--full
 				grid-template-columns: 1fr 1fr
-
+	.feedback
+		&__form
+			.input
+				height: 50px
+			
 @media( max-width: 1440px )
 	.product
 		&__action
@@ -1158,6 +1200,8 @@
 			align-items: normal
 			
 @media( max-width: 840px )
+	body
+		zoom: 0.9
 	.info
 		&__bg
 			display: none
@@ -1197,7 +1241,10 @@
 			
 		&__map
 			height: 400px
-	
+	.catalog
+		&__wrap
+			margin-bottom: 64px
+			
 @media( max-width: 768px )
 	.header
 		&__content
@@ -1265,6 +1312,16 @@
 					margin: 0 auto
 					
 @media( max-width: 640px )
+	body
+		zoom: 0.85
+		
+	.breadcrumb
+		&__title
+			font-size: 32px
+			
+		&__wrap
+			padding: 30px 0 10px
+			
 	.info
 		&__group
 			padding-bottom: 32px
@@ -1285,6 +1342,10 @@
 			margin-bottom: 32px
 			
 	.product
+		&__gallery
+			.gallery
+				grid-template-columns: 1fr 1fr 1fr 1fr
+			
 		&__tabs
 			.tabs
 				display: grid
@@ -1299,9 +1360,40 @@
 				
 			&__image
 				display: grid
+				
+	.about
+		margin-top: 32px
+		margin-bottom: 32px
+		
+		&__item
+			margin: 0 auto
+			grid-template-columns: 1fr
+			gap: 32px
 			
+			&:nth-child(2n)
+				.item
+					&__left
+						grid-column: 1
+						grid-row: 1
+					&__right
+						grid-column: 1
+						grid-row: 2
+				
 @media( max-width: 480px )
+	body
+		zoom: 1
+		
 	.header
+		padding: 5px 0
+		&__content
+			grid-template-columns: 150px 1fr 40px
+			
+		&__logo
+			svg
+				width: 110px
+		&__bar
+			zoom: .6
+			
 		&__feedback
 			display: none
 			
@@ -1318,18 +1410,102 @@
 			
 				input
 					height: 50px
+	.info
+		&__breadcrumb
+			display: none
+			
+		&__title
+			font-size: 24px
+			
+		&__btn
+			grid-template-columns: 1fr
+			margin-top: 16px
+	.contact
+		&__group
+			font-size: 16px
+	.product
+		&__tabs
+			.tabs
+				gap: 16px
+		.info
+			&__variables
+				display: grid
+				grid-template-columns: 1fr 1fr
+				gap: 16px
+				
+			&__variable
+				margin-bottom: 16px
+				select
+					padding: 8px
+					font-size: 14px
+				
+			&__title
+				max-width: 100%
+				margin: 0
+				
+			&__group
+				&--full
+					gap: 0
+					padding-top: 16px
 					
+			&__right
+				padding-left: 0
+				padding-right: 0
+				
+			&__image
+				grid-template-columns: 4fr 1fr
+				gap: 16px
+				
+		&__price
+			*
+				font-size: 24px !important
+					
+		&__gallery
+			
+			> a
+				margin-bottom: 16px
+			
+			.gallery
+				gap: 16px
+				grid-template-columns: 1fr
+				align-items: start
+				align-content: start
+	.catalog
+		&__list
+			.slick
+				&-dots
+					margin-top: 16px
+	.special
+		&__title
+			font-size: 28px
+			
 @media( max-width: 470px )
 	.catalog
 		&__group
 			.grid
 				.catalog
 					&__list
-						grid-template-columns: 1fr
+						//grid-template-columns: 1fr
 						
 						.item
 							&:last-child
 								display: block
+							
+							&__title
+								margin-bottom: 0
+								
+							&__price
+								.normal
+									font-size: 16px
+								
+			.slider
+				.item
+					&__title
+						margin-bottom: 0
+						
+					&__price
+						.normal
+							font-size: 16px
 							
 	.month
 		&__label

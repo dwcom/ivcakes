@@ -54,6 +54,10 @@
                                     <div class="footer__title"><?php the_field('ip','option') ?></div>
                                     <div class="footer__text"><?php the_field('inn','option') ?></div>
                                 </div>
+                                
+                                <div class="footer__group" style="max-width: 300px">
+                                    <img src="http://ivcakes.test/wp-content/plugins/woocommerce-tochka/visa_mastercard_wordpress.png" alt="">
+                                </div>
                             </div>
                         </div>
                         <div class="footer__column">

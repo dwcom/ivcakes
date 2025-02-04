@@ -1,0 +1,76 @@
+// Отключение стандартной стилизации кнопок и инпутов в Safari и iOS
+%reset-appearance {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0;
+  background: white;
+  box-shadow: none;
+}
+
+// Отключение автостилей у всех input и button
+input,
+button {
+  @extend %reset-appearance;
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-size: inherit;
+  font-family: inherit;
+  color: inherit;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+// Отключение стандартных стилей у input[type="search"]
+input[type="search"] {
+  @extend %reset-appearance;
+}
+
+// Отключение встроенной кнопки очистки у input[type="search"]
+input[type="search"]::-webkit-search-cancel-button {
+  display: none;
+}
+
+// Отключение специфического стиля у select
+select {
+  @extend %reset-appearance;
+  padding-right: 30px; // Учитываем кастомную стрелку
+  position: relative;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+
+  &::after {
+    content: "▼";
+    position: absolute;
+    right: 10px;
+    pointer-events: none;
+  }
+}
+
+// Отключение синего фона при нажатии на кнопку или ссылку в iOS
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+// Отключение тени у input и textarea в iOS
+input,
+textarea {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+// Отключение жирного текста при долгом нажатии в iOS
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+// Убираем увеличение шрифта при вводе текста в iOS
+input, textarea {
+  font-size: 16px; // Минимальный размер, предотвращающий зум
+}
