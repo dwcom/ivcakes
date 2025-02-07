@@ -1,0 +1,20 @@
+.wc-block-checkout__shipping-option--free,
+.wc-block-checkout__use-address-for-billing {
+	display: none
+}
+
+.wc-block-components-button {
+	display: grid;
+    background: rgba(0, 0, 0, 0);
+    height: 50px;
+    align-items: center;
+    padding: 0 15px;
+    transition: .3s;
+    text-align: center;
+	color: #567e72;
+    border: 2px solid #567e72;
+}
+.wc-block-components-button:hover {
+	background: #567e72;
+	color: white;
+}

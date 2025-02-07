@@ -380,5 +380,91 @@
 		
 		return 'Атрибуты и вариации успешно перенесены.';
 	}
+
+
+add_filter('woocommerce_states', function($states) {
+    return array(
+        'RU' => array( // Только Москва и Московская область
+            'RU-MOW' => 'Москва',
+            'RU-MOS' => 'Московская область',
+        ),
+    );
+});
+
+add_filter('woocommerce_get_country_locale', function($locale) {
+    if (isset($locale['RU'])) {
+        $locale['RU']['state']['required'] = true; // Регион обязателен
+        $locale['RU']['state']['hidden'] = false;  // Показывать список
+    }
+    return $locale;
+});
+
+add_filter('default_checkout_billing_postcode', function() {
+    return '101000'; // Почтовый индекс Москвы
+});
+
+add_filter('default_checkout_shipping_postcode', function() {
+    return '101000'; // Почтовый индекс для доставки
+});
+
+add_filter('woocommerce_checkout_fields', function($fields) {
+    if (isset($fields['billing']['billing_postcode'])) {
+        $fields['billing']['billing_postcode']['required'] = false; // Сделать необязательным
+        $fields['billing']['billing_postcode']['class'] = array('hidden'); // Добавить скрытый класс
+    }
+    if (isset($fields['shipping']['shipping_postcode'])) {
+        $fields['shipping']['shipping_postcode']['required'] = false;
+        $fields['shipping']['shipping_postcode']['class'] = array('hidden');
+    }
+    return $fields;
+});
+
+
+add_action('woocommerce_thankyou', 'send_order_to_telegram', 10, 1);
+
+function send_order_to_telegram($order_id) {
+    if (!$order_id) return;
+
+    // Получаем объект заказа
+    $order = wc_get_order($order_id);
+
+    // Telegram API параметры
+    $telegram_token = '8104546666:AAH076bdIUrXztSHwHBRyen4bx1WymjOAuY'; // Получите у @BotFather
+    $chat_id = '-1008104546666'; // Найдите через @userinfobot
+
+    // Данные заказа
+    $order_number = $order->get_order_number();
+    $order_total = $order->get_total();
+    $order_currency = $order->get_currency();
+    $customer_name = $order->get_billing_first_name() . ' ' . $order->get_billing_last_name();
+    $customer_phone = $order->get_billing_phone();
+    $customer_email = $order->get_billing_email();
+
+    // Получаем список товаров
+    $items = $order->get_items();
+    $product_list = "";
+    foreach ($items as $item) {
+        $product_list .= "🔹 " . $item->get_name() . " × " . $item->get_quantity() . "\n";
+    }
+
+    // Формируем сообщение
+    $message = "📦 *Новый заказ!* #$order_number\n\n";
+    $message .= "👤 *Клиент:* $customer_name\n";
+    $message .= "📞 *Телефон:* $customer_phone\n";
+    $message .= "✉️ *Email:* $customer_email\n";
+    $message .= "\n🛍 *Товары:*\n$product_list";
+    $message .= "\n💰 *Сумма:* $order_total $order_currency\n";
+    $message .= "\n🔗 [Открыть заказ](https://ivcakes.ru/wp-admin/post.php?post=$order_id&action=edit)";
+
+    // Кодируем сообщение
+    $message = urlencode($message);
+
+    // Отправка через Telegram API
+    $url = "https://api.telegram.org/bot$telegram_token/sendMessage?chat_id=$chat_id&parse_mode=Markdown&text=$message";
+
+    // Выполняем запрос
+    wp_remote_get($url);
+}
+
 	
 	
