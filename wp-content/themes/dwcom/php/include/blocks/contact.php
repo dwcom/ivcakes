@@ -35,7 +35,7 @@
 								<a href="<?php echo $phone_link ?>"><?php echo $phone ?></a>
 							</div>
 						</div>
-						<button class="contact__btn btn btn-green-outline" type="button" data-theme="Связаться с нами">Связаться с нами</button>
+						<a class="contact__btn btn btn-green-outline" href="/contact/">Связаться с нами</a>
 						<div class="contact__social">
 							<a href="<?php the_field('wa','option') ?>">
 								<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">

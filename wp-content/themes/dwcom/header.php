@@ -110,9 +110,9 @@
                             </div>
                             <div class="card montserrat" id="headerCardCount"><?php echo WC()->cart->get_cart_contents_count() ?></div>
                         </a>
-                        <button class="header__feedback btn btn-beige-outline popupOpen" type="button" data-theme="Связаться с нами">
+                        <a class="header__feedback btn btn-beige-outline" href="/contact/">
                             <span>Связаться с нами</span>
-                        </button>
+                        </a>
                     </div>
                  
                 </div>
