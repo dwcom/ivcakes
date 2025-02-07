@@ -246,6 +246,8 @@
 	</div>
 </section>
 
+<?php include get_template_directory() . "/php/include/blocks/faq.php"; ?>
+
 <!--	Front page = Special -->
 <section class="special">
 	<?php
@@ -450,7 +452,6 @@
         margin-bottom: 64px
     }
 </style>
-
 <?php include get_template_directory() . "/php/include/blocks/benefit.php"; ?>
 <?php include get_template_directory() . "/php/include/blocks/feedback.php"; ?>
 <?php include get_template_directory() . "/php/include/blocks/contact.php"; ?>
