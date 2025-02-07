@@ -122,13 +122,13 @@
                         <div class="product__action">
                             <div class="product__price montserrat color-green">
 	                            <?php if ( $product->is_type( 'variable' ) ) { ?>
-                                    <div class="regular fs36 weight-700" id="product-price"><?php echo wc_price($default_price_html); ?></div>
+                                    <div class="regular fs32 weight-700" id="product-price"><?php echo wc_price($default_price_html); ?></div>
                                 <?php } else { ?>
 		                            <?php if ($sale_price) : ?>
-                                        <div class="new fs36 weight-700"><?php echo wc_price($sale_price); ?></div>
+                                        <div class="new fs32 weight-700"><?php echo wc_price($sale_price); ?></div>
                                         <div class="old fs18 weight-500"><?php echo wc_price($regular_price); ?></div>
 		                            <?php else : ?>
-                                        <div class="regular  fs36 weight-700"><?php echo wc_price($regular_price); ?></div>
+                                        <div class="regular fs32 weight-700"><?php echo wc_price($regular_price); ?></div>
 		                            <?php endif; ?>
                                 <?php } ?>
                             </div>
