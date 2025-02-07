@@ -10,8 +10,9 @@
     <script src="/wp-content/themes/dwcom/js/jquery.js"></script>
     <script src="/wp-content/themes/dwcom/js/slider.js"></script>
     <script src="/wp-content/themes/dwcom/js/gallery.js"></script>
+    <script src="/wp-content/themes/dwcom/js/mask.js"></script>
     <script src="/wp-content/themes/dwcom/js/common.js"></script>
-
+    
 </head>
 
 <body>
