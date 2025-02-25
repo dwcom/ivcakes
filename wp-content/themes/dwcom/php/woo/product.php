@@ -102,7 +102,7 @@
                                             <label class="fs18 weight-600" for="<?php echo esc_attr( $attribute_name ); ?>">
 												<?php echo wc_attribute_label( $attribute_name ); ?>
                                             </label>
-                                            <select id="<?php echo esc_attr( $attribute_name ); ?>"
+                                            <select class="getSelect" id="<?php echo esc_attr( $attribute_name ); ?>"
                                                     class="variable-attribute fs20"
                                                     data-attribute_name="<?php echo esc_attr( $attribute_name ); ?>">
                                                 <option value="">Выберите</option>
@@ -122,10 +122,10 @@
                         <div class="product__action">
                             <div class="product__price montserrat color-green">
 	                            <?php if ( $product->is_type( 'variable' ) ) { ?>
-                                    <div class="regular fs32 weight-700" id="product-price"><?php echo wc_price($default_price_html); ?></div>
+                                    <div class="regular fs24 weight-700" id="product-price"><?php echo wc_price($default_price_html); ?></div>
                                 <?php } else { ?>
 		                            <?php if ($sale_price) : ?>
-                                        <div class="new fs32 weight-700"><?php echo wc_price($sale_price); ?></div>
+                                        <div class="new fs24 weight-700"><?php echo wc_price($sale_price); ?></div>
                                         <div class="old fs18 weight-500"><?php echo wc_price($regular_price); ?></div>
 		                            <?php else : ?>
                                         <div class="regular fs32 weight-700"><?php echo wc_price($regular_price); ?></div>
@@ -479,10 +479,13 @@
 				checkAndSetDescription();
 			});
 		});
-
-
-	   
 	    
+	    $('.getSelect').select2({
+		    placeholder: "Выберите вариант",
+		    allowClear: true
+	    });
+
+     
     });
 </script>
 

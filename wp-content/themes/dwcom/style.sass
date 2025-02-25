@@ -6,7 +6,7 @@
 @import 'css/preset'
 @import 'css/variation'
 @import 'css/woo'
-@import 'css/customize'
+@import 'css/customize.css'
 @import 'css/font'
 
 .header
@@ -215,6 +215,7 @@
 			max-width: 840px
 			margin-top: 40px
 			margin-bottom: 120px
+			margin-left: 0
 			
 	&__breadcrumb
 		color: $beige
@@ -692,7 +693,7 @@
 		
 	&__purchase
 		display: grid
-		grid-template-columns: 50px 1fr
+		grid-template-columns: 70px 1fr
 		gap: 16px
 		
 		input
@@ -702,7 +703,7 @@
 			padding-left: 15px
 		
 		.btn
-			min-width: 200px
+			min-width: 240px
 			
 			span
 				align-items: center
@@ -959,7 +960,7 @@
 						background: $green
 	.info
 		&__title
-			font-size: 54p
+			font-size: 54px
 		&__group
 			&--full
 				grid-template-columns: 1fr 1fr
@@ -989,7 +990,9 @@
 		&__group
 			&--full
 				gap: 32px
-@media( max-width: 1280px )
+@media( max-width: 1320px )
+	body
+		zoom: 0.9
 	.header
 		padding: 8px 0
 		
@@ -1002,24 +1005,34 @@
 	.info
 		&__group
 			grid-template-columns: 580px 1fr
+			margin: 0 auto
+			padding-top: 60px
+			align-items: center
 			
 		&__title
-			line-height: 1
+			line-height: 1.1
+			color: #567e72
+			margin: 20px 0
+			font-size: 48px
+			min-height: auto
 			
 		&__bg
-			height: 400px
+			display: none
 			
 		&__btn
 			&--line
 				display: none
 				
 		&__subtitle
-			font-size: 16px
+			//font-size: 16px
 			max-width: 95%
 			margin-bottom: 32px
 			
 		&__wrap
 			margin-bottom: 64px
+		&__breadcrumb
+			*
+				color: #567e72
 	.special
 		&__wrap
 			margin-bottom: 64px
@@ -1066,7 +1079,10 @@
 					
 	.contact
 		&__content
-			grid-template-columns: 2fr 1fr
+			grid-template-columns: 1fr 1fr
+			
+		&__map
+			height: 50vh
 			
 	.footer
 		&__menu
@@ -1082,12 +1098,13 @@
 			&__group
 				&--full
 					grid-template-columns: 1fr 1fr
+					align-items: start
 				
 			&__title
 				margin-left: 0
 				font-size: 36px
 				line-height: 1.4
-				min-height: 120px
+				min-height: auto
 				
 			&__bg
 				height: 320px
@@ -1100,7 +1117,6 @@
 			&__tabs
 				.tabs
 					font-size: 18px
-		
 				
 @media( max-width: 1024px )
 	.info
@@ -1275,8 +1291,6 @@
 	.catalog
 		&__wrap
 			margin-bottom: 64px
-			
-@media( max-width: 768px )
 	.header
 		&__content
 			grid-template-columns: 150px 1fr 40px

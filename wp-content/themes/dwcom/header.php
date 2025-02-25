@@ -7,7 +7,6 @@
 	<?php wp_head(); ?>
 
     <link rel="stylesheet" href="/wp-content/themes/dwcom/style.min.css">
-	<link rel="stylesheet" href="/wp-content/themes/dwcom/css/customize.css">
     <script src="/wp-content/themes/dwcom/js/jquery.js"></script>
     <script src="/wp-content/themes/dwcom/js/slider.js"></script>
     <script src="/wp-content/themes/dwcom/js/gallery.js"></script>

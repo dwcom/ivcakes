@@ -4,7 +4,6 @@
 .woocommerce-customer-details {
 	display: none
 }
-
 .wc-block-components-button {
 	display: grid;
     background: rgba(0, 0, 0, 0);
@@ -20,7 +19,6 @@
 	background: #567e72;
 	color: white;
 }
-
 .custom-thankyou-container {
     text-align: center;
     background: #f0f4f8;
@@ -30,62 +28,52 @@
     margin: 50px auto;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
-
 .custom-thankyou-icon {
     font-size: 60px;
-    color: #4CAF50;
+    color: #567E72FF;
     margin-bottom: 20px;
 }
-
 .custom-thankyou-container h2 {
     font-size: 24px;
     color: #333;
     margin-bottom: 10px;
 }
-
 .order-details, .order-total {
     font-size: 18px;
     color: #000;
     margin-bottom: 10px;
 }
-
 .tracking-code {
     font-size: 18px;
     color: #000;
     font-weight: bold;
     margin-bottom: 5px;
 }
-
 .custom-thankyou-container h3 {
     font-size: 20px;
     color: #444;
     margin-top: 20px;
 }
-
 .order-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 15px;
 }
-
 .order-table th, .order-table td {
     border: 1px solid #ddd;
     padding: 10px;
     text-align: left;
 }
-
 .order-table th {
-    background: #4CAF50;
+    background: #567E72FF;
     color: white;
 }
-
 .order-table td {
     background: #fff;
 }
-
 .custom-thankyou-btn {
     display: inline-block;
-    background: #4CAF50;
+    background: #567E72FF;
     color: white;
     padding: 12px 20px;
     border-radius: 5px;
@@ -95,34 +83,28 @@
     margin-top: 20px;
     transition: 0.3s;
 }
-
 .custom-thankyou-btn:hover {
-    background: #45a049;
+    background: #567E72FF;
 }
-
 .woocommerce-order > p,
 .woocommerce-notice.woocommerce-notice--success.woocommerce-thankyou-order-received,
 .woocommerce-order-overview {
     display: none !important;
 }
-
 body, button, input, textarea, select {
     font-family: "Aeroport", "Montserrat", sans-serif;
     color: #333;
     font-weight: 300;
 }
-
 body:not(.woocommerce-block-theme-has-button-styles) .wc-block-components-button:not(.is-link) {
 	background: white;
 }
 .is-medium .wc-block-cart__sidebar, .is-mobile .wc-block-cart__sidebar, .is-small .wc-block-cart__sidebar {
 	padding: 15px !important
 }
-
 .info__title--840 {
 	font-size: 46px;
 }
-
 .wc-block-components-form .wc-block-components-text-input input[type=date],
 .wc-block-components-form .wc-block-components-text-input input[type=time],
 .wc-block-components-form .wc-block-components-text-input.is-active input[type=date],
@@ -140,7 +122,6 @@ body:not(.woocommerce-block-theme-has-button-styles) .wc-block-components-button
     width: 100%;
 	padding: 1.5em .5em .5em;
 }
-
 .wc-block-components-form .wc-block-components-text-input input:-webkit-autofill+label, 
 .wc-block-components-form .wc-block-components-text-input label, 
 .wc-block-components-text-input input:-webkit-autofill+label, 
@@ -148,3 +129,63 @@ body:not(.woocommerce-block-theme-has-button-styles) .wc-block-components-button
 	top: 0 !important;
     transform: translateY(4px) scale(.75) !important;
 }
+.select2-container--default .select2-selection--single {
+	background-color: #ffffff;
+	border: 2px solid #567E72FF;
+	border-radius: 0;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	transition: all 0.3s ease-in-out;
+}
+.select2-container--default .select2-selection--single .select2-selection__clear {
+	height: auto;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+	top: 12px
+}
+.select2-container--default .select2-selection--single:hover,
+.select2-container--default .select2-selection--single:focus {
+	border-color: #567E72FF; /* Темнее при наведении */
+	box-shadow: 0 0 8px rgba(76, 175, 80, 0.4);
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+	color: #333; /* Чёрный текст */
+	font-weight: 600;
+	padding-left: 12px;
+	font-size: 16px;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+	border-color: #567E72FF transparent transparent transparent !important;
+}
+.select2-dropdown {
+	background-color: #fff;
+	border: 2px solid #567E72FF;
+	border-radius: 8px;
+	box-shadow: 0 4px 10px rgba(76, 175, 80, 0.2);
+}
+.select2-container--default .select2-results__option {
+	padding: 10px;
+	font-size: 16px;
+	color: #333;
+	transition: background 0.2s ease-in-out;
+}
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+	background-color: #567E72FF !important;
+	color: #fff;
+}
+.select2-container--default .select2-results__option[aria-selected=true] {
+	background-color: #E8F5E9; /* Светло-зелёный */
+	color: #fff;
+}
+.select2-container--default .select2-selection__clear {
+	color: #d32f2f;
+	font-size: 18px;
+	font-weight: bold;
+	margin-right: 10px;
+	transition: color 0.2s ease-in-out;
+}
+.select2-container--default .select2-selection__clear:hover {
+	color: #b71c1c;
+}
+
