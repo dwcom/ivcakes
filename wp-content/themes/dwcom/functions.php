@@ -420,51 +420,286 @@ add_filter('woocommerce_checkout_fields', function($fields) {
 });
 
 
-add_action('woocommerce_thankyou', 'send_order_to_telegram', 10, 1);
+add_action('template_redirect', 'send_order_to_telegram_on_payment_page');
 
-function send_order_to_telegram($order_id) {
-    if (!$order_id) return;
+function send_order_to_telegram_on_payment_page() {
+    if (is_checkout() && isset($_GET['order']) && isset($_GET['key'])) {
+        $order_id = absint($_GET['order']);
+        $order = wc_get_order($order_id);
 
-    // Получаем объект заказа
-    $order = wc_get_order($order_id);
+        if (!$order) return;
 
-    // Telegram API параметры
-    $telegram_token = '8104546666:AAH076bdIUrXztSHwHBRyen4bx1WymjOAuY'; // Получите у @BotFather
-    $chat_id = '-1008104546666'; // Найдите через @userinfobot
+        // Проверяем, отправлялось ли уже сообщение
+        if (get_post_meta($order_id, '_telegram_sent', true)) {
+            return;
+        }
 
-    // Данные заказа
-    $order_number = $order->get_order_number();
-    $order_total = $order->get_total();
-    $order_currency = $order->get_currency();
-    $customer_name = $order->get_billing_first_name() . ' ' . $order->get_billing_last_name();
-    $customer_phone = $order->get_billing_phone();
-    $customer_email = $order->get_billing_email();
+        // Telegram API параметры
+        $telegram_token = '8104546666:AAH076bdIUrXztSHwHBRyen4bx1WymjOAuY';
+        $chat_id = '-1002366801077';
 
-    // Получаем список товаров
-    $items = $order->get_items();
-    $product_list = "";
-    foreach ($items as $item) {
-        $product_list .= "🔹 " . $item->get_name() . " × " . $item->get_quantity() . "\n";
+        // Данные заказа
+        $order_number = $order->get_order_number();
+        $order_total = $order->get_total();
+        $order_currency = $order->get_currency();
+        $customer_name = $order->get_billing_first_name() . ' ' . $order->get_billing_last_name();
+        $customer_phone = $order->get_billing_phone();
+        $customer_email = $order->get_billing_email();
+
+        // Получаем список товаров
+        $items = $order->get_items();
+        $product_list = "";
+        foreach ($items as $item) {
+            $product_list .= "🔹 " . $item->get_name() . " × " . $item->get_quantity() . "\n";
+        }
+
+        // Формируем сообщение
+        $message = "📌 *Заказ ожидает оплаты!* #$order_number\n\n";
+        $message .= "👤 *Клиент:* $customer_name\n";
+        $message .= "📞 *Телефон:* $customer_phone\n";
+        $message .= "✉️ *Email:* $customer_email\n";
+        $message .= "\n🛍 *Товары:*\n$product_list";
+        $message .= "\n💰 *Сумма:* $order_total $order_currency\n";
+        $message .= "\n🔗 [Открыть заказ](https://ivcakes.ru/wp-admin/post.php?post=$order_id&action=edit)";
+
+        // Кодируем сообщение
+        $message = urlencode($message);
+
+        // Отправка через Telegram API
+        $url = "https://api.telegram.org/bot$telegram_token/sendMessage?chat_id=$chat_id&parse_mode=Markdown&text=$message";
+        
+        $response = wp_remote_get($url);
+
+        if (!is_wp_error($response)) {
+            // Помечаем, что уведомление уже отправлено
+            update_post_meta($order_id, '_telegram_sent', 1);
+        }
     }
-
-    // Формируем сообщение
-    $message = "📦 *Новый заказ!* #$order_number\n\n";
-    $message .= "👤 *Клиент:* $customer_name\n";
-    $message .= "📞 *Телефон:* $customer_phone\n";
-    $message .= "✉️ *Email:* $customer_email\n";
-    $message .= "\n🛍 *Товары:*\n$product_list";
-    $message .= "\n💰 *Сумма:* $order_total $order_currency\n";
-    $message .= "\n🔗 [Открыть заказ](https://ivcakes.ru/wp-admin/post.php?post=$order_id&action=edit)";
-
-    // Кодируем сообщение
-    $message = urlencode($message);
-
-    // Отправка через Telegram API
-    $url = "https://api.telegram.org/bot$telegram_token/sendMessage?chat_id=$chat_id&parse_mode=Markdown&text=$message";
-
-    // Выполняем запрос
-    wp_remote_get($url);
 }
 
-	
-	
+
+
+add_action('wp', function () {
+    if (is_order_received_page()) {
+        add_action('woocommerce_thankyou', 'custom_order_received_content', 10);
+
+    }
+});
+
+
+function custom_order_received_content($order_id) {
+    if (!$order_id) return;
+
+    $order = wc_get_order($order_id);
+    $order_number = $order->get_order_number(); // Номер заказа
+    $order_total = $order->get_total(); // Итоговая сумма без тегов
+    $currency_symbol = get_woocommerce_currency_symbol();
+    $billing_name = $order->get_formatted_billing_full_name();
+    $billing_address = implode(', ', array_filter([
+        $order->get_billing_address_1(),
+        $order->get_billing_address_2(),
+        $order->get_billing_city(),
+        $order->get_billing_state(),
+        $order->get_billing_postcode()
+    ]));
+    $customer_note = $order->get_customer_note();
+    $payment_method = $order->get_payment_method_title();
+    $shipping_method = implode(', ', wp_list_pluck($order->get_shipping_methods(), 'name'));
+    $items = $order->get_items();
+
+    echo '<div class="custom-thankyou-container">';
+    
+    // Иконка подтверждения
+    echo '<div class="custom-thankyou-icon">✔</div>';
+    echo '<h2>Спасибо, ваш заказ оформлен!</h2>';
+    
+    // Основная информация
+    echo '<p class="tracking-code">Номер вашего заказа: <strong>' . esc_html($order_number) . '</strong></p>';
+    echo '<p class="order-total">Общая сумма заказа: <strong>' . wc_price($order_total) . '</strong></p>';
+    
+    // Детали заказа
+    echo '<div class="order-details">';
+    echo '<h3>Детали заказа</h3>';
+    echo '<p><strong>Имя:</strong> ' . esc_html($billing_name) . '</p>';
+    echo '<p><strong>Адрес доставки:</strong> ' . esc_html($billing_address) . '</p>';
+    echo '<p><strong>Оплата:</strong> ' . esc_html($payment_method) . '</p>';
+    if (!empty($customer_note)) {
+        echo '<p><strong>Комментарий:</strong> ' . esc_html($customer_note) . '</p>';
+    }
+    echo '</div>';
+
+    // Таблица товаров
+    echo '<h3>Состав заказа</h3>';
+    echo '<table class="order-table">';
+    echo '<thead><tr><th>Товар</th><th>Кол-во</th><th>Цена</th></tr></thead>';
+    echo '<tbody>';
+    foreach ($items as $item_id => $item) {
+        $product = $item->get_product();
+        $product_name = $product ? $product->get_name() : 'Товар удален';
+        $quantity = $item->get_quantity();
+        $subtotal = wc_price($item->get_total()); // **Теперь цена форматируется правильно!**
+
+        echo '<tr>';
+        echo '<td>' . esc_html($product_name) . '</td>';
+        echo '<td>' . esc_html($quantity) . '</td>';
+        echo '<td>' . $subtotal . '</td>'; // **Выводим корректную цену**
+        echo '</tr>';
+    }
+    echo '</tbody></table>';
+
+    // Кнопка "Продолжить покупки"
+    echo '<a href="' . esc_url(wc_get_page_permalink('shop')) . '" class="custom-thankyou-btn">Продолжить покупки</a>';
+    echo '</div>';
+}
+
+function custom_product_title_with_category_and_price($title) {
+    if (is_product()) {
+        global $post, $product;
+
+        // Получаем родительскую категорию
+        $terms = get_the_terms($post->ID, 'product_cat');
+        $parent_cat = '';
+        if (!empty($terms)) {
+            foreach ($terms as $term) {
+                if ($term->parent == 0) { // Берем только родительскую категорию
+                    $parent_cat = $term->name;
+                    break;
+                }
+            }
+        }
+
+        // Получаем цену товара
+        $price = $product->get_price();
+        $currency = get_woocommerce_currency_symbol();
+
+        // Проверяем наличие данных
+        if (!empty($parent_cat) && !empty($price)) {
+            $title = sprintf('%s %s на заказ за %s%s в Москве | Ivcakes', 
+                $parent_cat, 
+                get_the_title($post->ID), 
+                $price, 
+                $currency
+            );
+        }
+    }
+    return $title;
+}
+add_filter('wpseo_title', 'custom_product_title_with_category_and_price');
+
+
+// Добавление нового пункта меню в админку
+add_action('admin_menu', function() {
+    add_menu_page(
+        'Вариации',
+        'Вариации',
+        'manage_options',
+        'custom_variations',
+        'render_custom_variations_page',
+        'dashicons-admin-generic',
+        30
+    );
+});
+
+// Функция рендеринга страницы с вкладками и визуальным редактором
+function render_custom_variations_page() {
+    $taxonomy = 'pa_nachinki-na-vybor'; // Таксономия
+    $terms = get_terms(['taxonomy' => $taxonomy, 'hide_empty' => false]);
+    
+    if (is_wp_error($terms) || empty($terms)) {
+        echo '<div class="notice notice-warning"><p>Нет доступных вариаций.</p></div>';
+        return;
+    }
+    
+    echo '<div class="wrap">
+            <h1>Вариации</h1>
+            <h2 class="nav-tab-wrapper">';
+    
+    foreach ($terms as $index => $term) {
+        echo '<a href="#" class="nav-tab' . ($index === 0 ? ' nav-tab-active' : '') . '" data-tab="' . esc_attr($term->slug) . '">' . esc_html($term->name) . '</a>';
+    }
+    
+    echo '</h2>
+          <div id="tabs-content">';
+    
+    foreach ($terms as $index => $term) {
+        $description = get_option('variation_description_' . $term->term_id, '');
+        
+        echo '<div class="tab-content' . ($index === 0 ? ' active' : '') . '" id="' . esc_attr($term->slug) . '">
+                <form method="post" action="">
+                    <p>Содержимое для: <strong>' . esc_html($term->name) . '</strong></p>';
+        wp_editor($description, 'variation_description_' . $term->term_id, ['textarea_name' => 'variation_description_' . $term->term_id]);
+        echo '<p><input type="submit" name="save_variation_description" value="Сохранить" class="button button-primary"></p>
+                </form>
+              </div>';
+    }
+    
+    echo '</div></div>';
+    
+    // Подключение JS для работы вкладок
+    echo '<script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const tabs = document.querySelectorAll(".nav-tab");
+                const contents = document.querySelectorAll(".tab-content");
+                tabs.forEach(tab => {
+                    tab.addEventListener("click", function(e) {
+                        e.preventDefault();
+                        tabs.forEach(t => t.classList.remove("nav-tab-active"));
+                        contents.forEach(c => c.classList.remove("active"));
+                        this.classList.add("nav-tab-active");
+                        document.getElementById(this.getAttribute("data-tab")).classList.add("active");
+                    });
+                });
+            });
+          </script>';
+    
+    // Подключение стилей
+    echo '<style>
+            .tab-content { display: none; padding: 10px; border: 1px solid #ddd; }
+            .tab-content.active { display: block; }
+          </style>';
+}
+
+// Обработка сохранения описаний
+if (isset($_POST['save_variation_description'])) {
+    foreach ($_POST as $key => $value) {
+        if (strpos($key, 'variation_description_') === 0) {
+            $term_id = str_replace('variation_description_', '', $key);
+            update_option($key, wp_kses_post($value));
+        }
+    }
+}
+
+
+add_action('rest_api_init', function () {
+    register_rest_route('custom/v1', '/variations', [
+        'methods'  => 'GET',
+        'callback' => 'get_variations_data',
+        'permission_callback' => '__return_true'
+    ]);
+});
+
+function get_variations_data() {
+    $taxonomy = 'pa_nachinki-na-vybor';
+    $terms = get_terms(['taxonomy' => $taxonomy, 'hide_empty' => false]);
+
+    if (is_wp_error($terms) || empty($terms)) {
+        return [];
+    }
+
+    $variations_data = [];
+
+    foreach ($terms as $term) {
+        $description = get_option('variation_description_' . $term->term_id, '');
+        $variations_data[$term->slug] = wpautop($description); // Добавляем wpautop()
+    }
+
+    return rest_ensure_response($variations_data);
+}
+
+function custom_sort_newest_products_first( $query ) {
+    if ( ! is_admin() && $query->is_main_query() && ( is_shop() || is_product_category() || is_product_tag() ) ) {
+        $query->set( 'orderby', 'date' );
+        $query->set( 'order', 'DESC' );
+    }
+}
+add_action( 'pre_get_posts', 'custom_sort_newest_products_first' );

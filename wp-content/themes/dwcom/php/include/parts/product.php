@@ -4,7 +4,8 @@
     $sale_price = $product->get_sale_price();
     $current_price = $product->get_price();
     $video = get_field('video');
-    $video_toggle = $video ? 'video' : 'classic';
+	$video_toggle = 'classic';
+    //$video_toggle = $video ? 'video' : 'classic';
 ?>
 <div class="item <?php echo $video_toggle ?>">
 	<a class="item__link" href="<?php echo get_permalink() ?>">
@@ -14,12 +15,12 @@
                 <img src="<?php echo get_the_post_thumbnail_url( get_the_ID(), 'product-540-810' ) ?>" alt="<?php the_title() ?>" />
             </div>
             
-            <?php if ($video) { ?>
+<!--             <?php if ($video) { ?>
                 <video class="item__video" autoplay muted loop preload="auto">
                     <source src="<?php the_field('video') ?>">
                 </video>
             <?php } ?>
-            
+             -->
 	        <?php if ( $sale_price ) { ?>
                 <div class="item__label fs18">Акция</div>
             <?php } ?>
@@ -33,10 +34,10 @@
         <div class="item__title mb16 color-green weight-500 fs22"><?php the_title() ?></div>
         <div class="item__price montserrat">
             <?php if ( $sale_price ) { ?>
-                <div class="old fs28 weight-500"><?php echo wc_price($regular_price) ?></div>
-                <div class="new fs32 weight-700"><?php echo wc_price($sale_price) ?></div>
+                <div class="old fs24 weight-500"><?php echo wc_price($regular_price) ?></div>
+                <div class="new fs24 weight-700"><?php echo wc_price($sale_price) ?></div>
             <?php } else { ?>
-                <div class="normal fs32 weight-700"><?php echo wc_price($current_price) ?></div>
+                <div class="normal fs24 weight-700"><?php echo wc_price($current_price) ?></div>
             <?php } ?>
         </div>
 	</a>

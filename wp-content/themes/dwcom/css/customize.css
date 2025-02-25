@@ -1,5 +1,7 @@
 .wc-block-checkout__shipping-option--free,
-.wc-block-checkout__use-address-for-billing {
+.wc-block-checkout__use-address-for-billing,
+.woocommerce-order-details,
+.woocommerce-customer-details {
 	display: none
 }
 
@@ -17,4 +19,132 @@
 .wc-block-components-button:hover {
 	background: #567e72;
 	color: white;
+}
+
+.custom-thankyou-container {
+    text-align: center;
+    background: #f0f4f8;
+    padding: 40px;
+    border-radius: 10px;
+    max-width: 700px;
+    margin: 50px auto;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.custom-thankyou-icon {
+    font-size: 60px;
+    color: #4CAF50;
+    margin-bottom: 20px;
+}
+
+.custom-thankyou-container h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.order-details, .order-total {
+    font-size: 18px;
+    color: #000;
+    margin-bottom: 10px;
+}
+
+.tracking-code {
+    font-size: 18px;
+    color: #000;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.custom-thankyou-container h3 {
+    font-size: 20px;
+    color: #444;
+    margin-top: 20px;
+}
+
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.order-table th, .order-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.order-table th {
+    background: #4CAF50;
+    color: white;
+}
+
+.order-table td {
+    background: #fff;
+}
+
+.custom-thankyou-btn {
+    display: inline-block;
+    background: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 20px;
+    transition: 0.3s;
+}
+
+.custom-thankyou-btn:hover {
+    background: #45a049;
+}
+
+.woocommerce-order > p,
+.woocommerce-notice.woocommerce-notice--success.woocommerce-thankyou-order-received,
+.woocommerce-order-overview {
+    display: none !important;
+}
+
+body, button, input, textarea, select {
+    font-family: "Aeroport", "Montserrat", sans-serif;
+    color: #333;
+    font-weight: 300;
+}
+
+body:not(.woocommerce-block-theme-has-button-styles) .wc-block-components-button:not(.is-link) {
+	background: white;
+}
+.is-medium .wc-block-cart__sidebar, .is-mobile .wc-block-cart__sidebar, .is-small .wc-block-cart__sidebar {
+	padding: 15px !important
+}
+
+.info__title--840 {
+	font-size: 46px;
+}
+
+.wc-block-components-form .wc-block-components-text-input input[type=date],
+.wc-block-components-form .wc-block-components-text-input input[type=time],
+.wc-block-components-form .wc-block-components-text-input.is-active input[type=date],
+.wc-block-components-form .wc-block-components-text-input.is-active input[type=time] {
+	border: 1px solid hsla(0, 0%, 7%, .8);
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #2b2d2f;
+    font-family: inherit;
+    font-size: 1em;
+    height: 3.125em;
+    line-height: 1em;
+    margin: 0;
+    min-height: 0;
+    width: 100%;
+	padding: 1.5em .5em .5em;
+}
+
+.wc-block-components-form .wc-block-components-text-input input:-webkit-autofill+label, 
+.wc-block-components-form .wc-block-components-text-input label, 
+.wc-block-components-text-input input:-webkit-autofill+label, 
+.wc-block-components-text-input label {
+	top: 0 !important;
+    transform: translateY(4px) scale(.75) !important;
 }

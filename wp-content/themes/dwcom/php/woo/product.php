@@ -213,7 +213,8 @@
                             <div class="blocks">
 
                                 <div class="block active productTabBlock" id="subtitle">
-                                    <div class="info__subtitle fs18 mb64 info__subtitle--680 product__subtitle"><?php the_content() ?></div>
+									<div class="info__subtitle fs18 mb64 info__subtitle--680 product__subtitle" id="subtitleEditor"></div>
+									<div class="info__subtitle fs18 mb64 info__subtitle--680 product__subtitle" id="defaultProductContent" style="display: none;"><?php the_content(); ?></div>
                                 </div>
                                 
 	                            <?php if ( $compound ) { ?>
@@ -439,6 +440,47 @@
 	    }
 	    
 	    $('.variable-attribute').on('change', updatePrice);
+		
+		
+		jQuery(document).ready(function ($) {
+			let variationsData = {}; // Данные вариаций
+
+			// Загружаем данные вариаций
+			$.ajax({
+				url: '/wp-json/custom/v1/variations',
+				method: 'GET',
+				success: function (response) {
+					variationsData = response;
+					checkAndSetDescription(); // Проверяем и устанавливаем описание при загрузке
+				},
+				error: function () {
+					console.error("Не удалось загрузить данные вариаций.");
+				}
+			});
+
+			// Функция для установки описания
+			function checkAndSetDescription() {
+				let selectedOption = $('.variable-attribute option:selected').val(); // Получаем выбранное значение
+
+				if (selectedOption && variationsData[selectedOption]) {
+					$('#subtitleEditor').html(variationsData[selectedOption]); // Устанавливаем описание
+				} else {
+					$('#subtitleEditor').html($('#defaultProductContent').html()); // Если нет описания, показываем стандартный контент
+				}
+			}
+
+			// Обработчик изменения вариации
+			$(document).on('change', '.variable-attribute', function () {
+				checkAndSetDescription();
+			});
+
+			// При загрузке страницы проверяем выбранные вариации
+			$(window).on('load', function () {
+				checkAndSetDescription();
+			});
+		});
+
+
 	   
 	    
     });

@@ -172,13 +172,51 @@
                                 <div class="month__image">
                                     <img src="<?php echo get_the_post_thumbnail_url( $month_id, 'product-840-840' ) ?>" alt="<?php the_title($month_id) ?>" />
                                 </div>
-                                <div class="month__label">
-                                    <div class="title fs32 weight-500"><?php echo get_the_title($month_id) ?></div>
-                                    <div class="price montserrat">
-                                        <div class="old weight-500 fs24"><?php echo wc_price(wc_get_product( $month_id )->get_sale_price()) ?></div>
-                                        <div class="new weight-600 fs32"><?php echo wc_price(wc_get_product( $month_id )->get_regular_price()) ?></div>
-                                    </div>
-                                </div>
+                                <?php
+									$product = wc_get_product($month_id);
+
+									if ($product) {
+										$price_prefix = '';
+
+										if ($product->is_type('variable')) {
+											$variations = $product->get_available_variations();
+											$min_regular_price = null;
+											$min_sale_price = null;
+
+											if (!empty($variations)) {
+												foreach ($variations as $variation) {
+													$variation_product = wc_get_product($variation['variation_id']);
+													$variation_regular_price = (float) $variation_product->get_regular_price();
+													$variation_sale_price = (float) $variation_product->get_sale_price();
+
+													if ($min_regular_price === null || $variation_regular_price < $min_regular_price) {
+														$min_regular_price = $variation_regular_price;
+													}
+
+													if ($variation_sale_price && ($min_sale_price === null || $variation_sale_price < $min_sale_price)) {
+														$min_sale_price = $variation_sale_price;
+													}
+												}
+												$price_prefix = 'От ';
+											}
+										} else {
+											$min_regular_price = (float) $product->get_regular_price();
+											$min_sale_price = (float) $product->get_sale_price();
+										}
+
+										if ($min_regular_price) { ?>
+											<div class="month__label">
+												<div class="title fs32 weight-500"><?php echo get_the_title($month_id); ?></div>
+												<div class="price montserrat">
+													<?php if ($min_sale_price && $min_sale_price < $min_regular_price) : ?>
+														<div class="old weight-500 fs24"><?php echo wc_price($min_sale_price); ?></div>
+													<?php endif; ?>
+													<div class="new weight-600 fs24"><?php echo $price_prefix . wc_price($min_regular_price); ?></div>
+												</div>
+											</div>
+										<?php }
+									} ?>
+
                             </div>
                         </div>
                     </div>
